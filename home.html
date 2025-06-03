@@ -88,6 +88,12 @@
     </style>
 </head>
 <body>
+    <script>
+        // BLOQUEIO DE ACESSO SEM LOGIN
+        if (localStorage.getItem('logado') !== 'true') {
+            window.location.href = 'index.html';
+        }
+    </script>
     <header>
         <h1>Tela Principal</h1>
     </header>
@@ -97,15 +103,15 @@
             <p>Bem vindo!</p>
         </div>
         <button class="btn" onclick="sair()">Sair</button>
-
+    </div>
     
     <footer>
         <p>By Instrutor</p>
     </footer>
 
-   <script>
+    <script>
         function sair() {
-            localStorage.removeItem('logado'); 
+            localStorage.removeItem('logado'); // Remove a flag de login
             window.location.href = "index.html";
         }
 
