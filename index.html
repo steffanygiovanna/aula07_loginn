@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela de Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f0f2f5;
+        }
+        
+        header {
+            background-color: #42b27a;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #79e018;
+            color: white;
+        }
+        
+        footer {
+            background-color: #00ad1d;
+            padding: 10px;
+            text-align: center;
+            margin-top: auto;
+            border-top: 1px solid #297d5d;
+            color: white;
+        }
+        
+        .container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .login-form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 300px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            text-align: center;
+            color: #42b274;
+            font-weight: bold;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #dddfe2;
+            border-radius: 4px;
+        }
+        
+        .btn {
+            background-color: #37b610;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            display: block;
+            margin: 0 auto;
+            font-weight: bold;
+        }
+        
+        .btn:hover {
+            background-color: #16e5db;
+        }
+        
+        h1 {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Tela de Login</h1>
+    </header>
+    
+    <div class="container">
+        <div class="login-form">
+            <div class="form-group">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" placeholder="Digite seu email">
+            </div>
+            <div class="form-group">
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" placeholder="Digite sua senha">
+            </div>
+            <button class="btn" onclick="validarLogin()">Entrar</button>
+        </div>
+    </div>
+    
+    <footer>
+        <p>By Instrutor</p>
+    </footer>
+
+    <script>
+ 
+        async function gerarHash(senha) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(senha);
+            const hashBuffer = await window.crypto.subtle.digest('SHA-256', data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            return hashHex;
+        }
+
+        async function validarLogin() {
+            const emailCorreto = "tinkbell1910@gmail.com";
+            const senhaCorretaHash = "f99e17147eaae1c8963af45dbbd70410729488ef3c1f0adba93fa7954e881335" ;
+
+         const email = document.getElementById('email').value;
+    const senha = document.getElementById('senha').value;
+    const senhaHash = await gerarHash(senha);
+
+    if (email === emailCorreto && senhaHash === senhaCorretaHash) {
+        window.location.href = "home.html";
+    } else {
+        alert("E-mail ou senha incorretos!");
+    }
+}
+</script>
+</body>
+</html>

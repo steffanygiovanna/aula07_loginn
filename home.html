@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela Principal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f0f2f5;
+        }
+        
+        header {
+            background-color: #42b27a;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #79e018;
+            color: white;
+        }
+        
+        footer {
+            background-color: #00ad1d;
+            padding: 10px;
+            text-align: center;
+            margin-top: auto;
+            border-top: 1px solid #297d5d;
+            color: white;
+        }
+        
+        .container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .welcome-message {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #42b274;
+            font-weight: bold;
+        }
+        
+        .btn {
+            background-color: #37b610;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .btn:hover {
+            background-color: #16e5db;
+        }
+        
+        h1 {
+            margin: 0;
+        }
+  
+        .hash-form {
+            margin-top: 30px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px #0001;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .hash-result {
+            margin-top: 10px;
+            word-break: break-all;
+            color: #333;
+            font-size: 14px;
+            background: #f7f7f7;
+            padding: 10px;
+            border-radius: 4px;
+            max-width: 400px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Tela Principal</h1>
+    </header>
+    
+    <div class="container">
+        <div class="welcome-message">
+            <p>Bem vindo!</p>
+        </div>
+        <button class="btn" onclick="sair()">Sair</button>
+
+    
+    <footer>
+        <p>By Instrutor</p>
+    </footer>
+
+    <script>
+        function sair() {
+            window.location.href = "index.html";
+        }
+
+        async function gerarHash(event) {
+            event.preventDefault();
+            const senha = document.getElementById('senha').value;
+            const encoder = new TextEncoder();
+            const data = encoder.encode(senha);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            document.getElementById('hashResult').textContent = hashHex;
+        }
+    </script>
+</body>
+</html>
