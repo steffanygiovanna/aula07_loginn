@@ -123,14 +123,15 @@
         }
 
         async function validarLogin() {
-            const emailCorreto = "tinkbell1910@gmail.com";
-            const senhaCorretaHash = "f99e17147eaae1c8963af45dbbd70410729488ef3c1f0adba93fa7954e881335" ;
+    const emailCorreto = "tinkbell1910@gmail.com";
+    const senhaCorretaHash = "f99e17147eaae1c8963af45dbbd70410729488ef3c1f0adba93fa7954e881335" ;
 
-         const email = document.getElementById('email').value;
+    const email = document.getElementById('email').value;
     const senha = document.getElementById('senha').value;
     const senhaHash = await gerarHash(senha);
 
     if (email === emailCorreto && senhaHash === senhaCorretaHash) {
+        localStorage.setItem('logado', 'true'); 
         window.location.href = "home.html";
     } else {
         alert("E-mail ou senha incorretos!");
