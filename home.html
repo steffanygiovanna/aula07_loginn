@@ -89,7 +89,7 @@
 </head>
 <body>
     <script>
-        // BLOQUEIO DE ACESSO SEM LOGIN
+       
         if (localStorage.getItem('logado') !== 'true') {
             window.location.href = 'index.html';
         }
@@ -111,7 +111,7 @@
 
     <script>
         function sair() {
-            localStorage.removeItem('logado'); // Remove a flag de login
+            localStorage.removeItem('logado'); 
             window.location.href = "index.html";
         }
 
